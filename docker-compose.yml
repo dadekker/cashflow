@@ -1,0 +1,21 @@
+services:
+  cashflow:
+    build: .
+    container_name: cashflow
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: sqlite:////data/cashflow.db
+    volumes:
+      - cashflow_data:/data
+    networks:
+      - swag
+    expose:
+      - "8000"
+    ports:
+      - "8000:8000"
+volumes:
+  cashflow_data:
+networks:
+  swag:
+    external: true
